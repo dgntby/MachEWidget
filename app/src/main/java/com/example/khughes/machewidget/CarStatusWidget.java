@@ -235,7 +235,7 @@ public class CarStatusWidget extends AppWidgetProvider {
 
         // If no status information, print something generic and return
         // TODO: also refresh the icons as if we're logged out?
-        CarStatus carStatus = new StoredData(context).getCarStatus(VIN);
+        CarStatusCN carStatus = new StoredData(context).getCarStatus(VIN);
         if (carStatus == null || carStatus.getVehiclestatus() == null) {
             views.setTextViewText(R.id.lastRefresh, "Unable to retrieve status information.");
             appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -334,7 +334,7 @@ public class CarStatusWidget extends AppWidgetProvider {
             views.setImageViewResource(R.id.lock, lockStatus.equals("LOCKED") ?
                     R.drawable.locked_icon_green : R.drawable.unlocked_icon_red);
         }
-
+/*
         // Ignition and remote start
         String ignition = carStatus.getIgnition();
         Boolean remote = carStatus.getRemoteStartStatus();
@@ -410,7 +410,7 @@ public class CarStatusWidget extends AppWidgetProvider {
                     sdf = new SimpleDateFormat(Constants.STATUSTIMEFORMAT, Locale.US);
                     Calendar endChargeTime = Calendar.getInstance();
                     try {
-                        endChargeTime.setTime(sdf.parse(carStatus.getVehiclestatus().getChargeEndTime().getValue()));
+                        endChargeTime.setTime(sdf.parse(carStatus.getVehiclestatus().getChargeEndTime()));
 
                         Calendar nowTime = Calendar.getInstance();
                         long min = Duration.between(nowTime.toInstant(), endChargeTime.toInstant()).getSeconds() / 60;
@@ -489,7 +489,7 @@ public class CarStatusWidget extends AppWidgetProvider {
                     Toast.makeText(context, "carStatus.getVehiclestatus().getFuel().getFuelLevel() is null", Toast.LENGTH_SHORT).show();
                 }
             }
-        }
+        }*/
 
         // 12 volt battery status
         Integer LVBLevel = carStatus.getLVBVoltage();
@@ -523,14 +523,15 @@ public class CarStatusWidget extends AppWidgetProvider {
         updateTire(views, carStatus.getRightRearTirePressure(), carStatus.getRightRearTireStatus(),
                 pressureUnits, pressureConversion, R.id.rrtire);
 
-        // Window statuses
+/*        // Window statuses
         updateWindow(views, carStatus.getDriverWindow(), R.id.lfwindow, R.drawable.icons8_left_front_window_down_red);
         updateWindow(views, carStatus.getPassengerWindow(), R.id.rfwindow, R.drawable.icons8_right_front_window_down_red);
         updateWindow(views, carStatus.getLeftRearWindow(), R.id.lrwindow, R.drawable.icons8_left_rear_window_down_red);
-        updateWindow(views, carStatus.getRightRearWindow(), R.id.rrwindow, R.drawable.icons8_right_rear_window_down_red);
+        updateWindow(views, carStatus.getRightRearWindow(), R.id.rrwindow, R.drawable.icons8_right_rear_window_down_red);*/
 
         // Get the right images to use for this vehicle
         Map<String, Integer> vehicleImages = Utils.getVehicleDrawables(VIN);
+/*
 
         // Hood, tailgate, and door statuses
         views.setImageViewResource(R.id.hood,
@@ -546,6 +547,7 @@ public class CarStatusWidget extends AppWidgetProvider {
         views.setImageViewResource(R.id.rt_rr_door,
                 isDoorClosed(carStatus.getRightRearDoor()) ? R.drawable.filler : vehicleImages.get(Utils.RIGHT_REAR_DOOR));
         views.setImageViewResource(R.id.wireframe, vehicleImages.get(Utils.WIREFRAME));
+*/
 
         views.setTextColor(R.id.DataLine2, context.getColor(R.color.white));
         // OTA status
@@ -910,7 +912,7 @@ public class CarStatusWidget extends AppWidgetProvider {
             LocalDateTime time = LocalDateTime.now(ZoneId.systemDefault());
             long nowtime = time.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
             if (nowtime - lastLockClicktime < 500) {
-                CarStatus carStatus = new StoredData(context).getCarStatus(VIN);
+                CarStatusCN carStatus = new StoredData(context).getCarStatus(VIN);
                 if (!awaitingUpdate && carStatus != null && carStatus.getLock() != null) {
                     if (carStatus.getLock().equals("LOCKED")) {
                         unlock(context);
@@ -920,11 +922,11 @@ public class CarStatusWidget extends AppWidgetProvider {
                 }
             }
             lastLockClicktime = nowtime;
-        } else if (action.equals(IGNITION_CLICK)) {
+/*        } else if (action.equals(IGNITION_CLICK)) {
             LocalDateTime time = LocalDateTime.now(ZoneId.systemDefault());
             long nowtime = time.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
             if (nowtime - lastIgnitionClicktime < 500) {
-                CarStatus carStatus = new StoredData(context).getCarStatus(VIN);
+                CarStatusCN carStatus = new StoredData(context).getCarStatus(VIN);
                 if (!awaitingUpdate && carStatus != null && carStatus.getRemoteStartStatus() != null
                         && carStatus.getIgnition() != null && carStatus.getIgnition().equals("Off")) {
                     if (!carStatus.getRemoteStartStatus()) {
@@ -934,7 +936,7 @@ public class CarStatusWidget extends AppWidgetProvider {
                     }
                 }
             }
-            lastIgnitionClicktime = nowtime;
+            lastIgnitionClicktime = nowtime;*/
         } else if (action.equals(REFRESH_CLICK)) {
             LocalDateTime time = LocalDateTime.now(ZoneId.systemDefault());
             long nowtime = time.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();

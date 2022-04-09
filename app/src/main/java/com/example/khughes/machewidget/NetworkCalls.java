@@ -1,15 +1,19 @@
 package com.example.khughes.machewidget;
 
+import static com.example.khughes.machewidget.Constants.DEVICEID;
+
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
@@ -82,12 +86,14 @@ public class NetworkCalls {
                         for (int retry2 = 2; retry2 >= 0; --retry2) {
                             Map<String, String> jsonParams = new ArrayMap<>();
                             jsonParams.put("code", accessToken.getAccessToken());
+                            jsonParams.put("device_id", DEVICEID);
                             RequestBody body = RequestBody.create((new JSONObject(jsonParams)).toString(), okhttp3.MediaType.parse("application/json; charset=utf-8"));
 
                             call = OAuth2Client.getAccessToken(body);
                             try {
                                 response = call.execute();
                                 if (response.isSuccessful()) {
+
                                     accessToken = response.body();
                                     data.putExtra("access_token", accessToken.getAccessToken());
                                     data.putExtra("refresh_token", accessToken.getRefreshToken());
@@ -113,6 +119,9 @@ public class NetworkCalls {
                                 break;
                             }
                         }
+                    }
+                    else {
+                        Log.e("============ford", response.body().toString());
                     }
                 } catch (java.net.SocketTimeoutException ee) {
                     LogFile.e(context, MainActivity.CHANNEL_ID, "java.net.SocketTimeoutException in NetworkCalls.getAccessToken");
@@ -212,13 +221,13 @@ public class NetworkCalls {
         if (MainActivity.checkInternetConnection(context)) {
             StatusService statusClient = NetworkServiceGenerators.createCarStatusService(StatusService.class, context);
             for (int retry = 2; retry >= 0; --retry) {
-                Call<CarStatus> call = statusClient.getStatus(token, language, Constants.APID, VIN);
+                Call<CarStatusCN> call = statusClient.getStatus(token, language, Constants.APID, VIN);
                 try {
-                    Response<CarStatus> response = call.execute();
+                    Response<CarStatusCN> response = call.execute();
                     if (response.isSuccessful()) {
                         LogFile.i(context, MainActivity.CHANNEL_ID, "status successful.");
 //                    String tmp =response.toString();
-                        CarStatus car = response.body();
+                        CarStatusCN car = response.body();
                         if (car.getStatus() == Constants.HTTP_SERVER_ERROR) {
                             LogFile.i(context, MainActivity.CHANNEL_ID, "server is broken");
                         } else if (car.getVehiclestatus() != null) {

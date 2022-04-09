@@ -7,6 +7,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('.\\machekeystore.jks')
+            storePassword 'machewidget'
+            keyAlias = 'macheKey'
+            keyPassword 'machewidget'
+        }
+    }
     compileSdk 31
 
     defaultConfig {

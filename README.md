@@ -1,3 +1,23 @@
+# 福特电马 Mach-E 中国版安卓桌面小插件
+
+- 感谢“小件件”sriptable 插件。本代码里所有URL都来自于这个插件的探索。
+- 感谢原作者和几位下文里提到的作者。
+
+## 注意：
+福特在中国改变了这些服务器接口的返回值，所以本插件远不如国外的强大。国外的是可以远程获取几乎所有车辆信息（包括车门，充电等）甚至也可以远程控制车辆。非常强大。
+
+看起来放在中国之后这些接口有变化。导致仅仅能获得定位，胎压，锁车状态，行驶里程等简单的数据。
+
+本人和给我帮忙的小兄弟时间实在有限，希望未来有朋友能发现更多的福特中国服务器API，让这个插件像是国外一样强大。
+
+## 声明
+- 本人不是这个插件的原作者，仅仅做了一些基于公开信息的中国本土的接口适配。
+- 本代码遵循GPL协议，必须开源。
+- 本人从未从本代码获益，也建议任何组织和个人不要从中获益。涉及到法律相关问题与本人无关。
+
+## 这里下载release版
+[app-release.apk](https://github.com/dgntby/MachEWidget/tree/master/app/release/app-release.apk?raw=true)
+
 # Mustang Mach-E Widget for Android
 
 [![Donate](https://img.shields.io/badge/donate-paypal-green.svg?style=for-the-badge)](https://www.paypal.com/donate/?hosted_button_id=HULVHBSWXDU9S)

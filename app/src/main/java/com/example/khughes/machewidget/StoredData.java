@@ -35,7 +35,7 @@ public class StoredData {
     private static final String REFRESHTOKEN = "RefreshToken";
     private static final String PROGRAMSTATE = "ProgramState";
     private static final String TOKENTIMEOUT = "TokenTimeout";
-    private static final String CARSTATUS = "CarStatus";
+    private static final String CARSTATUS = "CarStatusCN";
     private static final String OTASTATUS = "OTAStatus";
     private static final String HVBSTATUS = "HVBStatus";
     private static final String TPMSSTATUS = "TPMSStatus";
@@ -257,16 +257,16 @@ public class StoredData {
         commitWait(edit.putString(PROGRAMSTATE, state));
     }
 
-    public CarStatus getCarStatus(String VIN) {
+    public CarStatusCN getCarStatus(String VIN) {
         SharedPreferences pref = mContext.getSharedPreferences(VIN, MODE_PRIVATE);
         String status = pref.getString(CARSTATUS, "{}");
         if (!status.equals("{}") && !status.contains("vehiclestatus")) {
             status = StringCompressor.decompress(status.getBytes(Charsets.ISO_8859_1));
         }
-        return gson.fromJson(status, CarStatus.class);
+        return gson.fromJson(status, CarStatusCN.class);
     }
 
-    public void setCarStatus(String VIN, CarStatus status) {
+    public void setCarStatus(String VIN, CarStatusCN status) {
         SharedPreferences.Editor edit = mContext.getSharedPreferences(VIN, MODE_PRIVATE).edit();
         String str = new String(StoredData.StringCompressor.compress(gson.toJson(status)), Charsets.ISO_8859_1);
         edit.putString(CARSTATUS, str);

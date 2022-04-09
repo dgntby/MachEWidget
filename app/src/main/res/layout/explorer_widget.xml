@@ -13,7 +13,7 @@
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ford_explorer_logo" />
+        android:src="@drawable/ford_f150_logo" />
 
     <ImageView
         android:id="@+id/leftanchor"

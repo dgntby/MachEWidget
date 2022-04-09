@@ -1,6 +1,7 @@
 package com.example.khughes.machewidget;
 
 import android.content.Context;
+import android.util.Log;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -22,6 +23,7 @@ public class NetworkServiceGenerators {
                             message += "&username=<redacted>&password=<redacted>";
                         }
                     }
+                    Log.d("=======OkHttp3", message);
                     LogFile.d(mContext, "OkHttp3", message);
                 }
             })
@@ -29,7 +31,8 @@ public class NetworkServiceGenerators {
 
     // Generators for account authentication
 
-    private static final String FORD_BASE_URL = "https://fcis.ice.ibmcloud.com/v1.0/endpoint/default/";
+    // private static final String FORD_BASE_URL = "https://fcis.ice.ibmcloud.com/v1.0/endpoint/default/";
+    private static final String FORD_BASE_URL = "https://sso.ci.ford.com.cn/v1.0/endpoint/default/";
 
     private static final Retrofit.Builder fordBuilder =
             new Retrofit.Builder()
@@ -52,7 +55,8 @@ public class NetworkServiceGenerators {
         return fordRetrofit.create(serviceClass);
     }
 
-    private static final String OATH2_BASE_URL = "https://api.mps.ford.com/api/oauth2/v1/";
+    // private static final String OATH2_BASE_URL = "https://api.mps.ford.com/api/oauth2/v1/";
+    private static final String OATH2_BASE_URL = "https://cn.api.mps.ford.com.cn/api/oauth2/v1/";
 
     private static final Retrofit.Builder OAuth2Builder =
             new Retrofit.Builder()
@@ -77,7 +81,8 @@ public class NetworkServiceGenerators {
 
     // Generator for car status
 
-    private static final String CAR_STATUS_BASE_URL = "https://usapi.cv.ford.com/api/";
+    // private static final String CAR_STATUS_BASE_URL = "https://usapi.cv.ford.com/api/";
+    private static final String CAR_STATUS_BASE_URL = "https://cnapi.cv.ford.com.cn/api/";
 
     private static final Retrofit.Builder carStatusBuilder =
             new Retrofit.Builder()
@@ -102,7 +107,7 @@ public class NetworkServiceGenerators {
 
     // Generator for over-the-air update status
 
-    private static final String OTA_STATUS_BASE_URL = "https://www.digitalservices.ford.com/owner/api/v2/ota/";
+    private static final String OTA_STATUS_BASE_URL = "https://www.digitalservices.ford.com.cn/owner/api/v2/ota/";
 
     private static final Retrofit.Builder OTAStatusBuilder =
             new Retrofit.Builder()
@@ -127,7 +132,7 @@ public class NetworkServiceGenerators {
 
     // Generator for vehicle commands
 
-    private static final String COMMAND_BASE_URL = "https://usapi.cv.ford.com/api/";
+    private static final String COMMAND_BASE_URL = "https://cnapi.cv.ford.com.cn/api/";
 
     private static final Retrofit.Builder commandBuilder =
             new Retrofit.Builder()

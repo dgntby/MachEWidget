@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 public interface CommandService {
     @Headers({"Content-Type: application/json",
             "Accept-Encoding: gzip, deflate, br",
-            "User-Agent: FordPass/5 CFNetwork/1327.0.4 Chrome/96.0.4664.110"})
+            "User-Agent: fordpass-cn/232 CFNetwork/1325.0.1 Darwin/21.1.0"})
     @PUT("vehicles/{APIVERSION}/{VIN}/{COMPONENT}/{OPERATION}")
     Call<CommandStatus> putCommand(@Header("auth-token") String token,
                                    @Header("Application-Id") String APID,
@@ -23,7 +23,7 @@ public interface CommandService {
 
     @Headers({"Accept: application/json",
             "Accept-Encoding: gzip, deflate, br",
-            "User-Agent: FordPass/5 CFNetwork/1327.0.4 Chrome/96.0.4664.110",
+            "User-Agent: fordpass-cn/232 CFNetwork/1325.0.1 Darwin/21.1.0",
             "Referer: https://ford.com", "Origin: https://ford.com'"})
     @DELETE("vehicles/{APIVERSION}/{VIN}/{COMPONENT}/{OPERATION}")
     Call<CommandStatus> deleteCommand(@Header("auth-token") String token,
@@ -37,7 +37,7 @@ public interface CommandService {
     @Headers({"Accept: application/json",
             "Accept-Encoding: gzip",
             "Connection: Keep-Alive",
-            "User-Agent: FordPass/5 CFNetwork/1327.0.4 Chrome/96.0.4664.110",
+            "User-Agent: fordpass-cn/232 CFNetwork/1325.0.1 Darwin/21.1.0",
             "Referer: https://ford.com",
             "Origin: https://ford.com'"})
     @GET("vehicles/v3/{VIN}/{COMPONENT}/{OPERATION}/{CODE}")

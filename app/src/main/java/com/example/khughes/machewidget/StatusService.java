@@ -7,11 +7,15 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 
 public interface StatusService {
-    @Headers({"Accept: application/json",
+    @Headers({"Content-Type: application/json",
             "Accept-Encoding: gzip, deflate, br",
-            "User-Agent: FordPass/5 CFNetwork/1327.0.4 Chrome/96.0.4664.110"})
-    @GET("vehicles/v4/{VIN}/status")
-    Call<CarStatus> getStatus(@Header("auth-token") String token,
+            "Accept: */*",
+            "Accept-Language': en-us",
+            "User-Agent: fordpass-cn/232 CFNetwork/1325.0.1 Darwin/21.1.0"})
+/*            "User-Agent: FordPass/5 CFNetwork/1327.0.4 Chrome/96.0.4664.110"})*/
+    // @GET("vehicles/v4/{VIN}/status")
+    @GET("vehicles/{VIN}/status")
+    Call<CarStatusCN> getStatus(@Header("auth-token") String token,
                               @Header("Accept-Language") String language,
                               @Header("Application-Id") String APID,
                               @Path("VIN") String VIN);

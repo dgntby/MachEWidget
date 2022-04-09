@@ -36,7 +36,7 @@ public class Notifications extends BroadcastReceiver {
 
     private static Boolean LVBNotificationVisible = false;
 
-    public static void checkLVBStatus(Context context, CarStatus carStatus, String VIN) {
+    public static void checkLVBStatus(Context context, CarStatusCN carStatus, String VIN) {
         StoredData appInfo = new StoredData(context);
         String lastHVBStatus = appInfo.getHVBStatus(VIN);
         String currentLVBStatus = carStatus.getLVBStatus();
@@ -77,7 +77,7 @@ public class Notifications extends BroadcastReceiver {
 
     private static Boolean TPMSNotificationVisible = false;
 
-    public static void checkTPMSStatus(Context context, CarStatus carStatus, String VIN) {
+    public static void checkTPMSStatus(Context context, CarStatusCN carStatus, String VIN) {
         StoredData appInfo = new StoredData(context);
         String lastTPMSStatus = appInfo.getTPMSStatus(VIN);
         Map<String, String> currentTPMSStatus = new HashMap<String, String>();
